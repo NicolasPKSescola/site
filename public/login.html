@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log-in</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <nav class="menu">
+        <a class="link" href="index.html">Home</a>
+        <a class="link" href="galeria.html">Galeria</a>
+        <a class="link" href="chat.html">Chat</a>
+        <a class="link" href="login.html">Log-in</a>
+        <a class="link" href="cadastro.html">Cadastro</a>
+    </nav>
+    
+    <div class="conteiner-login">
+        <div class="conteiner-ch1">
+            <h1>Log-in</h1><br>
+        </div>
+
+        <div class="login-envio">
+            <label for="loginEmail">email</label><br>
+            <input type="email" id="loginEmail" placeholder="Digite seu email"><br><br>
+
+            <label for="loginSenha">senha</label><br>
+            <input type="password" id="loginSenha" placeholder="Digite sua senha"><br><br>
+
+            <button id="btnLogin">Enviar</button>
+            
+            <div id="mensagemLogin"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>©Desenvolvido por Nícolas Piasson</p>
+    </footer>
+
+    <script>
+        const button = document.querySelector('#btnLogin');
+        button.addEventListener('click', async () => {
+            const emailEntrada = document.querySelector('#loginEmail');
+            const senhaEntrada = document.querySelector('#loginSenha');
+            const resposta = document.querySelector('#mensagemLogin');
+
+            const emailDigitado = emailEntrada.value;
+            const senhaDigitada = senhaEntrada.value;
+
+            if (!emailDigitado || !senhaDigitada) {
+                resposta.innerText = 'Preencha todos os campos antes de enviar!'
+                resposta.style.color = 'red';
+                return;
+            }
+
+            try{
+                const respostaBE = await fetch('/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
+
+                const dados = await respostaBE.json();
+
+                if(!respostaBE.ok) {
+                    resposta.innerText = `${dados.erro}`;
+                    resposta.style.color = 'red';
+                    return;
+                }
+
+                resposta.innerText = `${dados.mensagem}: ${dados.perfil}`;
+                resposta.style.color = 'green';
+
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+            }
+            catch(erro) {
+                console.error('Erro na requisição:', erro);
+                resposta.innerText = 'Erro ao conectar com o servidor!!';
+                resposta.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+
+</html>

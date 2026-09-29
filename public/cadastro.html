@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <nav class="menu">
+        <a class="link" href="index.html">Home</a>
+        <a class="link" href="galeria.html">Galeria</a>
+        <a class="link" href="chat.html">Chat</a>
+        <a class="link" href="login.html">Log-in</a>
+        <a class="link" href="cadastro.html">Cadastro</a>
+    </nav>
+    
+    <div class="conteiner-cadastro">
+        <div class="conteiner-ch1">
+            <h1>Cadastro</h1><br>
+        </div>
+
+        <div class="cadastro-envio">
+            <label for="cadUsuario">Nome de usuario</label><br>
+            <input type="text" id="cadUsuario" placeholder="Digite seu nome"><br><br>
+
+            <label for="cadEmail">email</label><br>
+            <input type="email" id="cadEmail" placeholder="Digite seu email"><br><br>
+
+            <label for="cadSenha">senha</label><br>
+            <input type="password" id="cadSenha" placeholder="Digite sua senha"><br><br>
+
+            <button id="btnCad">Enviar</button>
+            
+            <div id="mensagemCadastro"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>©Desenvolvido por Nícolas Piasson</p>
+    </footer>
+
+    <script>
+        const button = document.querySelector('#btnCad');
+        button.addEventListener('click', async () => {
+            const usuarioEntrada = document.querySelector('#cadUsuario');
+            const emailEntrada = document.querySelector('#cadEmail');
+            const senhaEntrada = document.querySelector('#cadSenha');
+            const resposta = document.querySelector('#mensagemCadastro');
+
+            const usuarioDigitado = usuarioEntrada.value;
+            const emailDigitado = emailEntrada.value;
+            const senhaDigitada = senhaEntrada.value;
+
+            if (!usuarioDigitado || !emailDigitado || !senhaDigitada) {
+                resposta.innerText = 'Preencha todos os campos antes de enviar!'
+                resposta.style.color = 'red';
+                return;
+            }
+
+            resposta.innerText = 'Dados enviados aguarde 5 segundos...';
+            resposta.style.color = 'orange';
+
+            try{
+                const respostaBE = await fetch('/cadastro', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        usuario: usuarioDigitado,
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
+
+                const dados = await respostaBE.json();
+
+                if(!respostaBE.ok) {
+                    resposta.innerText = `${dados.erro}`;
+                    resposta.style.color = 'red';
+                    return;
+                }
+
+                resposta.innerText = `${dados.mensagem}: ${dados.perfil}`;
+                resposta.style.color = 'green';
+
+                usuarioEntrada.value = '';
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+            }
+            catch(erro) {
+                console.error('Erro na requisição:', erro);
+                resposta.innerText = 'Erro ao conectar com o servidor!!';
+                resposta.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+
+</html>
