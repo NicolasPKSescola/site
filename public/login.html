@@ -76,14 +76,12 @@
                 resposta.innerText = `${dados.mensagem}: ${dados.perfil}`;
                 resposta.style.color = 'green';
 
-                localStorage.setItem('usuarioLogado', dados.perfil);
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
 
                 setTimeout(()=>{
                     window.location.href='chat.html';
-                }, 1000)
-
-                emailEntrada.value = '';
-                senhaEntrada.value = '';
+                }, 1000);
             }
             catch(erro) {
                 console.error('Erro na requisição:', erro);

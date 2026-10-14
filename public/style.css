@@ -491,3 +491,41 @@ footer{
     line-height: 1.4;
     border: 3px solid var(--laranja);
 }
+
+@media(max-width: 768px) {
+    .hero-hdf, .esquerdo, .direito{
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .hero-hdf, .esquerdo, .hdf-front, .direito{
+        position: static !important;
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 15px 0 !important;
+        transform: none !important;
+    }
+
+    .hero-hdf{
+        padding: 0px;
+    }
+
+    .hero-titulo{
+        font-size: 3rem;
+        letter-spacing: 5px;
+        min-width: 200px;
+    }
+
+    .hero-subtitulo, .bloco-balao, .btn-principal{
+        font-size: 1rem;
+    }
+
+    .hero-subtitulo{
+        min-width: 200px;
+    }
+
+    .bloco-balao{
+        width: 300px;
+    }
+}
