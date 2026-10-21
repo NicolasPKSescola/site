@@ -70,9 +70,9 @@ app.post('/login', (req, res)=>{
         return res.status(400).json({erro:"Email ou senha incorretos!"});
     }
 
-    return res.json({
+    res.json({
         mensagem: "Login realizado com Sucesso!!",
-        usuario: emailExiste.email
+        perfil: emailExiste.usuario
     });
 })
 

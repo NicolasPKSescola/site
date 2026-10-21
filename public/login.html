@@ -76,6 +76,8 @@
                 resposta.innerText = `${dados.mensagem}: ${dados.perfil}`;
                 resposta.style.color = 'green';
 
+                localStorage.setItem('usuarioLogado', dados.perfil);
+
                 emailEntrada.value = '';
                 senhaEntrada.value = '';
 

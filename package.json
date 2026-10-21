@@ -1,5 +1,5 @@
 {
-  "name": "homem-de-ferro-main",
+  "name": "site",
   "version": "1.0.0",
   "type": "module",
   "main": "server.js",
@@ -13,7 +13,15 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.6",
-    "dotenv": "^18.0.3",
-    "express": "^5.2.1"
-  }
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolasPKSescola/site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NicolasPKSescola/site/issues"
+  },
+  "homepage": "https://github.com/NicolasPKSescola/site#readme"
 }
