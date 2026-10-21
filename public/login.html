@@ -73,10 +73,10 @@
                     return;
                 }
 
-                resposta.innerText = `${dados.mensagem}: ${dados.perfil}`;
+                resposta.innerText = `${dados.mensagem}`;
                 resposta.style.color = 'green';
 
-                localStorage.setItem('usuarioLogado', dados.perfil);
+                localStorage.setItem('usuarioLogado', dados.usuario);
 
                 emailEntrada.value = '';
                 senhaEntrada.value = '';

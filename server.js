@@ -43,18 +43,11 @@ app.post('/cadastro', (req, res)=>{
         });
     }
 
-    console.log(`Recebido, aguarde 5 segundo`);
+    console.log("Usuários no sistema:", usuarios);
 
     user.push({usuario, email, senha});
 
-    setTimeout(()=>{
-        console.log(`Cadastrado o ${usuario} com o Email ${email}`);
-
-        res.json({
-            mensagem: "Cadastrado com Sucesso!!",
-            perfil: `Perfil ${usuario} cadastrado com o email ${email}`
-        });
-    }, 5000);
+    return res.status(201).json({mensagem: "Cadastrado com Sucesso!"});
 });
 
 app.post('/login', (req, res)=>{
@@ -67,12 +60,12 @@ app.post('/login', (req, res)=>{
     const emailExiste = user.find((busca)=> busca.email.toLowerCase() === email.toLowerCase());
 
     if (!emailExiste || emailExiste.senha != senha) {
-        return res.status(400).json({erro:"Email ou senha incorretos!"});
+        return res.status(400).json({erro:"Email ou senha incorretos"});
     }
 
-    res.json({
-        mensagem: "Login realizado com Sucesso!!",
-        perfil: emailExiste.usuario
+    return res.status(201).json({
+        mensagem: "Login realizado com Sucesso!",
+        usuario: emailExiste.usuario
     });
 })
 
@@ -109,9 +102,9 @@ app.post('/chat', async (req, res)=>{
             return res.status(500).json({ erro: "Erro na comunicação com a Groq." });
         }
 
-        return res.json({ resposta: resultado.choices[0].message.content });
+        return res.json({resposta: resultado.choices[0].message.content});
     } catch (erro) {
-        return res.status(500).json({ erro: "Falha interna no servidor." });
+        return res.status(500).json({erro: "Falha interna no servidor."});
     }
 });
 
