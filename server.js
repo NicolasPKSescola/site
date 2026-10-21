@@ -45,7 +45,7 @@ app.post('/cadastro', (req, res)=>{
 
     console.log(`Recebido, aguarde 5 segundo`);
 
-    user.push(usuario, email, senha);
+    user.push({usuario, email, senha});
 
     setTimeout(()=>{
         console.log(`Cadastrado o ${usuario} com o Email ${email}`);
