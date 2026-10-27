@@ -43,7 +43,7 @@ app.post('/cadastro', (req, res)=>{
         });
     }
 
-    console.log("Usuários no sistema:", usuarios);
+    console.log("Usuários no sistema:", usuario);
 
     user.push({usuario, email, senha});
 

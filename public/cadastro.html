@@ -88,6 +88,10 @@
                 usuarioEntrada.value = '';
                 emailEntrada.value = '';
                 senhaEntrada.value = '';
+
+                setTimeout(()=>{
+                    window.location.href='login.html';
+                }, 1000);
             }
             catch(erro) {
                 console.error('Erro na requisição:', erro);
