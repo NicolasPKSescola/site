@@ -50,7 +50,7 @@
         function mensagemTela(autor, texto) {
             const textoFinal = document.createElement('p');
             textoFinal.className = 'msg';
-            textoFinal.textContent = `${autor}, ${texto}`;
+            textoFinal.textContent = `${autor}: ${texto}`;
             caixaChat.appendChild(textoFinal);
         };
 
